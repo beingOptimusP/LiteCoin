@@ -170,6 +170,9 @@
             document.getElementById("Tdividends").innerHTML = (
                 (await myContract.methods.getTotalDividendsDistributed().call()) / Math.pow(10, 18)
             ).noExponents();
+            document.getElementById("Dividends").innerHTML = (
+                (await myContract.methods.dividendTokenBalanceOf(accounts[0]).call()) / Math.pow(10, 18)
+            ).noExponents();
         }
 
         const claim = async() => {
