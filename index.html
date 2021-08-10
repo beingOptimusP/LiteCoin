@@ -28,7 +28,7 @@
         <section class="">
             <div class="w-11/12  mx-auto ">
                 <h1 style="text-align: center;" class="text-4xl font-semibold text-black py-3">LiteCoin Earnings Manager</h1>
-                <div style="background-color: green;" class="text-white text-xl flex flex-row justify-between p-3 my-3 rounded ">
+                <div style="background-color: ~green;" class="text-white text-xl flex flex-row justify-between p-3 my-3 rounded ">
                     <div>
                         <h1>
                             Your LiteHouse Holdings => <span id="balance">0</span>
@@ -75,7 +75,7 @@
                             </div>
                             <div>
                                 <p class="mb-2 text-sm font-medium text-gray-400">Total Dividends</p>
-                                <p class="text-lg font-semibold text-gray-200"><span id="Tdividends">0</span> LiteCoin</p>
+                                <p class="text-lg font-semibold text-gray-200"><span id="Tdividends">0</span> LiteHouse</p>
                             </div>
                         </div>
                     </div>
@@ -170,9 +170,8 @@
             document.getElementById("Tdividends").innerHTML = (
                 (await myContract.methods.getTotalDividendsDistributed().call()) / Math.pow(10, 18)
             ).noExponents();
-            document.getElementById("Dividends").innerHTML = (
-                (await myContract.methods.dividendTokenBalanceOf(accounts[0]).call()) / Math.pow(10, 18)
-            ).noExponents();
+            const result = await myContract.methods.getAccountDividendsInfo(accounts[0]).call();
+            document.getElementById("Dividends").innerHTML = (result[5] / Math.pow(10, 18)).noExponents()
         }
 
         const claim = async() => {
